@@ -145,3 +145,22 @@ function showOverlay(title, text, btn) {
 startBtn.addEventListener("click", () => {
     state === "paused" ? togglePause() : start();
 });
+
+// MOBILE
+
+let touchStart = null;
+canvas.addEventListener("touchstart", e => {
+    touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+});
+
+canvas.addEventListener("touchend", e => {
+    if (!touchStart) return;
+    const dx = e.changedTouches[0].clientX - touchStart.x;
+    const dy = e.changedTouches[0].clientY - touchStart.y;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) > 20) {
+        turn(Math.abs(dx) > Math.abs(dy)
+        ? { x: Math.sign(dx), y: 0 }
+        : { x: 0, y: Math.sign(dy) });
+    }
+    touchStart = null;
+});
