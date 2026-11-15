@@ -12,6 +12,10 @@ let nextDir = dir;
 function step() {
     dir = nextDir; // atualizar a direção da cobra
     const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+    const hitWall = head.x < 0 || head.x >= GRID || head.y < 0 || head.y >= GRID;
+    // a cauda está na última posição da cobra, então não conta como colisão, porque vai se mover
+    const hitSelf = snake.slice(0, -1).some(s => s.x === head.x && s.y === head.y);
+    if (hitWall || hitSelf) return gameOver();
     snake.unshift(head); // adicionar a nova cabeça à frente
     if (head.x === food.x && head.y === food.y) {
         placeFood(); // comeu, então fica com a cauda porque a cobra cresceu
@@ -58,4 +62,9 @@ function placeFood() {
         for (let y = 0; y < GRID; y++)
             if (!snake.some(s => s.x === x && s.y === y)) free.push({ x, y });
     food = free[Math.floor(Math.random() * free.length)];
+}
+
+function gameOver() {
+    alert("Game Over!");
+    location.reload();
 }
