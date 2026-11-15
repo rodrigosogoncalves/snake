@@ -14,6 +14,10 @@ const overlay = document.getElementById("overlay");
 const overlayTitle = document.getElementById("overlay-title");
 const overlayText = document.getElementById("overlay-text");
 const startBtn = document.getElementById("start");
+const bestEl = document.getElementById("best");
+
+let best = Number(localStorage.getItem("best")) || 0;
+bestEl.textContent = best;  
 
 // CURRENT STATE
 
@@ -102,7 +106,7 @@ function start() {
     overlay.classList.add("hidden");
     draw();
     timer = setTimeout(step, speed);
-}
+}   
 
 function togglePause() {
     if (state === "playing") {
@@ -118,7 +122,15 @@ function togglePause() {
 
 function gameOver() {
     state = "over";
-    showOverlay("Game Over", `Your score: ${score}`, "Try Again");
+
+    const record = score > best;
+    if (record) {
+        best = score;
+        localStorage.setItem("best", best);
+        bestEl.textContent = best;
+    }
+
+    showOverlay("Game Over", `Your score: ${score}${record ? " (New Record!)" : ""}`, "Try Again");
 }
 
 function showOverlay(title, text, btn) {
