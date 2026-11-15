@@ -2,12 +2,17 @@ const GRID = 20;
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 const CELL = canvas.width / GRID;
-const SPEED = 120;
+const START_SPEED = 120;
+const MIN_SPEED = 55;
+const SPEED_STEP = 5;
+const scoreEl = document.getElementById("score");
 
 let snake = [{x: 10, y: 10}, { x: 9, y: 10 }, { x: 8, y: 10 }];
 let food;
 let dir = {x: 1, y: 0};
 let nextDir = dir;
+let score = 0;
+let speed = START_SPEED;
 
 function step() {
     dir = nextDir; // atualizar a direção da cobra
@@ -18,12 +23,15 @@ function step() {
     if (hitWall || hitSelf) return gameOver();
     snake.unshift(head); // adicionar a nova cabeça à frente
     if (head.x === food.x && head.y === food.y) {
+        score++;
+        scoreEl.textContent = score;
+        speed = Math.max(MIN_SPEED, START_SPEED - score * SPEED_STEP);
         placeFood(); // comeu, então fica com a cauda porque a cobra cresceu
     } else {
         snake.pop(); // remover a cauda
     }
     draw();
-    setTimeout(step, SPEED);
+    setTimeout(step, speed);
 }
 
 function draw() {
@@ -35,9 +43,10 @@ function draw() {
     ctx.fillStyle = "#4ade80"
     snake.forEach(s => ctx.fillRect(s.x * CELL, s.y * CELL, CELL, CELL));
 }
+
 placeFood();
 draw()
-setTimeout(step, SPEED);
+setTimeout(step, speed);
 
 const KEYS = {
     ArrowUp: { x: 0, y: -1 }, w: { x: 0, y: -1 },

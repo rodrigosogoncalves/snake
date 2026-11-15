@@ -10,3 +10,15 @@ body {
 }
 
 canvas {background: #1e293b;}
+
+main { width: min(92vw, 400px); }
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+}
+
+h1 { font-size: 1.8rem; color: #4ade80; }
+.scores { display: flex; gap: 16px; font-size: 0.95rem; }
