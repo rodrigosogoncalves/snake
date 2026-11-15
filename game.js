@@ -59,11 +59,19 @@ function step() {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // comida redonda
     ctx.fillStyle = "#f87171"
-    ctx.fillRect(food.x * CELL, food.y * CELL, CELL, CELL);
+    ctx.beginPath();
+    ctx.arc((food.x + 0.5) * CELL, (food.y + 0.5) * CELL, CELL * 0.38, 0, 2 * Math.PI);
+    ctx.fill()
 
-    ctx.fillStyle = "#4ade80"
-    snake.forEach(s => ctx.fillRect(s.x * CELL, s.y * CELL, CELL - 1 , CELL - 1));
+    // cobra redonda e cabeça mais clara        
+    snake.forEach((s, i) => {
+        ctx.fillStyle = i === 0 ? "#86efac" : "#4ade80";
+        ctx.beginPath();
+        ctx.roundRect(s.x * CELL + 1, s.y * CELL + 1, CELL - 2, CELL - 2, 5);
+        ctx.fill()
+    });
 }
 
 function placeFood() {
