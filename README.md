@@ -1,5 +1,5 @@
 # Snake
-**[Play it here](https://rodrigosogoncalves.github.io/snake)
+**[Play it here](https://rodrigosogoncalves.github.io/snake)**
 ![Gameplay demo](gameShowcase1.gif)
 
 ## Controls
