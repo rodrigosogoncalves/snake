@@ -9,7 +9,45 @@ body {
     font-family: system-ui, sans-serif;
 }
 
-canvas {background: #1e293b;}
+.board { position: relative; }
+
+canvas {
+    width: 100%;
+    aspect-ratio: 1;
+    display: block;
+    background: #1e293b;
+    border-radius: 12px;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+    background: rgba(15, 23, 42, 0.85);
+    border-radius: 12px;
+}
+
+.overlay.hidden { display: none; }
+.overlay h2 { font-size: 2rem; }
+.overlay p { color: #94a3b8; line-height: 1.5; }
+
+button {
+    padding: 10px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0f172a;
+    background: #4ade80;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover  { background: #86efac; }
 
 main { width: min(92vw, 400px); }
 
