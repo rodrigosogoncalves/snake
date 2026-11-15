@@ -1,6 +1,9 @@
 # Snake
-**[Play it here](https://rodrigosogoncalves.github.io/snake)**
-![Gameplay demo](gameShowcase1.gif)
+
+<p align="center">
+    <img src="gameShowcase1.gif" alt="Gameplay demo" width = 400><br>
+    <a href="https://rodrigosogoncalves.github.io/snake"><b>Play it here</b></a>
+</p>
 
 ## Controls
 | Action | Keyboard | Mobile |
